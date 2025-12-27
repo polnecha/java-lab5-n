@@ -12,7 +12,6 @@ public class Cat implements Meower {
         System.out.println(name + ": мяу!");
     }
 
-    // Дополнительный метод из задачи 2.5.4 — мяукать N раз
     public void meow(int n) {
         if (n <= 0) return;
         StringBuilder sb = new StringBuilder(name + ": ");

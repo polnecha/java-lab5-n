@@ -4,12 +4,10 @@ public class Fraction implements Fractionable {
     private int numerator;
     private int denominator;
 
-    // Конструктор
     public Fraction(int numerator, int denominator) {
         if (denominator == 0) {
             throw new IllegalArgumentException("Знаменатель не может быть нулём!");
         }
-        // Приводим к каноническому виду: знаменатель всегда положительный
         if (denominator < 0) {
             numerator = -numerator;
             denominator = -denominator;
@@ -18,7 +16,6 @@ public class Fraction implements Fractionable {
         this.denominator = denominator;
     }
 
-    // Геттеры
     public int getNumerator() {
         return numerator;
     }
@@ -27,7 +24,6 @@ public class Fraction implements Fractionable {
         return denominator;
     }
 
-    // Реализация интерфейса
     @Override
     public double getValue() {
         return (double) numerator / denominator;
@@ -50,13 +46,11 @@ public class Fraction implements Fractionable {
         this.denominator = den;
     }
 
-    // Приведение к строке
     @Override
     public String toString() {
         return numerator + "/" + denominator;
     }
 
-    // Переопределение equals
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

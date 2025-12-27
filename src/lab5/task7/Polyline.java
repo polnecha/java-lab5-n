@@ -14,7 +14,6 @@ public class Polyline {
         return "Линия " + points.toString();
     }
 
-    // Геттер для тестирования (опционально)
     public List<Point> getPoints() {
         return new ArrayList<>(points);
     }

@@ -71,7 +71,6 @@ public class Main {
             System.out.println("Создана дробь: " + f);
             System.out.printf("Вещественное значение: %.6f\n", f.getValue());
 
-            // Изменение
             System.out.println("\n--- Изменение дроби ---");
             int newNum = InputUtils.readInt("Новый числитель: ");
             int newDen = 0;
@@ -92,7 +91,6 @@ public class Main {
             System.out.printf("Значение (1-й вызов): %.6f\n", cf.getValue());
             System.out.printf("Значение (2-й вызов): %.6f\n", cf.getValue());
 
-            // Изменение
             System.out.println("\n--- Изменение дроби ---");
             int newNum = InputUtils.readInt("Новый числитель: ");
             int newDen = 0;
@@ -114,11 +112,10 @@ public class Main {
     private static void workWithCats() {
         System.out.println("\n--- Задание 2: Количество мяуканий ---");
 
-        // Демонстрация задачи 2.5.4 (по условию)
         System.out.println("Демонстрация задачи 2.5.4:");
         Cat barsik = new Cat("Барсик");
-        barsik.meow();      // один раз
-        barsik.meow(3);     // три раза
+        barsik.meow();
+        barsik.meow(3);
 
         System.out.println("\n--- Подсчёт мяуканий через обёртку ---");
         String name = InputUtils.readString("Введите имя кота: ");
@@ -130,16 +127,14 @@ public class Main {
         CountingMeower countedCat = new CountingMeower(cat);
 
         System.out.println("Передаём кота в метод processMeowers...");
-        ProcessUtils.processMeowers(new Meower[]{countedCat}); // ← вызов из lab5.task2.ProcessUtils
+        ProcessUtils.processMeowers(new Meower[]{countedCat});
 
         System.out.println("Кот мяукнул " + countedCat.getMeowCount() + " раз(а).");
     }
     private static void workWithLists() {
         System.out.println("\n--- Задание 3: Разность списков (L1 \\ L2) ---");
 
-        // Пример ввода: можно сделать гибкий, но для простоты — фиксированный пример + ручной ввод опционально
 
-        // Пример 1: автоматический
         List<Integer> L1 = Arrays.asList(1, 2, 3, 2, 4, 5);
         List<Integer> L2 = Arrays.asList(2, 4, 6);
         List<Integer> L = ListUtils.differenceUnique(L1, L2);
@@ -148,7 +143,6 @@ public class Main {
         System.out.println("L2: " + L2);
         System.out.println("L (результат): " + L);
 
-        // Пример 2: ручной ввод (опционально)
         System.out.println("\n--- Ручной ввод ---");
         System.out.println("Введите элементы L1 (через запятую):");
         String input1 = InputUtils.readString("");
@@ -164,7 +158,6 @@ public class Main {
         System.out.println("Результат L: " + result);
     }
 
-    // Вспомогательный метод для парсинга строки в список строк
     private static List<String> parseList(String input) {
         if (input.trim().isEmpty()) {
             return new ArrayList<>();
@@ -230,15 +223,12 @@ public class Main {
         System.out.println("Программа читает текст из файла 'text.txt'.");
 
         try {
-            // Чтение всего файла
             String content = new String(Files.readAllBytes(Paths.get("text.txt")), "UTF-8");
 
-            // Извлечение слов: только русские буквы (и, на всякий, латинские — можно убрать)
-            // \p{L} — любая буква в Unicode, но ограничимся русскими:
-            String[] words = content.toLowerCase()
-                    .split("[^а-яёa-z]+"); // разделяем по НЕ-буквам
 
-            // Уберём пустые строки
+            String[] words = content.toLowerCase()
+                    .split("[^а-яёa-z]+");
+
             List<String> validWords = new ArrayList<>();
             for (String word : words) {
                 if (!word.isEmpty()) {
@@ -251,24 +241,20 @@ public class Main {
                 return;
             }
 
-            // Карта: буква -> количество слов, в которых она встречается
             Map<Character, Integer> charWordCount = new HashMap<>();
 
             for (String word : validWords) {
-                // Уникальные буквы в этом слове (чтобы не считать "м" дважды в "мама")
                 Set<Character> uniqueChars = new HashSet<>();
                 for (char c : word.toCharArray()) {
                     if (isRussianLetter(c)) {
                         uniqueChars.add(c);
                     }
                 }
-                // Увеличиваем счётчик для каждой уникальной буквы слова
                 for (char c : uniqueChars) {
                     charWordCount.put(c, charWordCount.getOrDefault(c, 0) + 1);
                 }
             }
 
-            // Отбираем буквы, встретившиеся ровно в одном слове
             List<Character> result = new ArrayList<>();
             for (Map.Entry<Character, Integer> entry : charWordCount.entrySet()) {
                 if (entry.getValue() == 1) {
@@ -276,7 +262,6 @@ public class Main {
                 }
             }
 
-            // Сортируем для красивого вывода
             Collections.sort(result);
 
             if (result.isEmpty()) {
@@ -296,14 +281,13 @@ public class Main {
         }
     }
 
-    // Вспомогательный метод: проверка, является ли символ русской буквой
+
     private static boolean isRussianLetter(char c) {
         return (c >= 'а' && c <= 'я') || c == 'ё';
     }
     private static void reverseQueueDemo() {
         System.out.println("\n--- Задание 6: Разворот очереди ---");
 
-        // Создаём и заполняем L1
         Queue<Integer> L1 = new LinkedList<>();
         L1.offer(1);
         L1.offer(2);
@@ -315,7 +299,6 @@ public class Main {
 
         System.out.println("Исходная очередь L1: " + L1);
 
-        // Выполняем разворот
         QueueUtils.reverseQueue(L1, L2);
 
         System.out.println("Очередь L1 после переноса: " + L1); // пустая
@@ -325,14 +308,13 @@ public class Main {
     private static void workWithPoints() {
         System.out.println("\n--- Задание 7: Обработка точек через Stream API ---");
 
-        // Создаём тестовые данные
         List<Point> points = Arrays.asList(
                 new Point(1, -2),
                 new Point(3, 4),
-                new Point(1, -2),   // дубликат
+                new Point(1, -2),
                 new Point(0, -5),
                 new Point(2, 3),
-                new Point(0, 5),    // не дубль (Y другой)
+                new Point(0, 5),
                 new Point(-1, -1)
         );
 
@@ -341,20 +323,12 @@ public class Main {
             System.out.println("  " + p);
         }
 
-        // Обработка через стрим
         Polyline polyline = processPoints(points);
 
         System.out.println("\nРезультат (ломаная):");
         System.out.println(polyline);
     }
 
-    /**
-     * Стрим-метод по заданию:
-     * - Убирает дубликаты (одинаковые X,Y),
-     * - Сортирует по X,
-     * - Делает Y положительным,
-     * - Собирает в lab5.task7.Polyline.
-     */
     public static Polyline processPoints(List<Point> points) {
         List<Point> result = points.stream()
                 .distinct()
@@ -370,20 +344,18 @@ public class Main {
         System.out.println("Чтение данных из файла 'people.txt'...");
 
         try {
-            // Чтение всех строк из файла
             List<String> lines = Files.readAllLines(Paths.get("people.txt"));
 
-            // Обработка через Stream API
             Map<Integer, List<String>> result = lines.stream()
-                    .filter(line -> line != null && !line.trim().isEmpty()) // убрать пустые
-                    .filter(line -> line.contains(":"))                      // есть разделитель
-                    .map(line -> line.split(":", 2))                         // делим на [имя, номер]
-                    .filter(parts -> parts.length == 2 && !parts[1].trim().isEmpty()) // есть номер
-                    .filter(parts -> parts[1].trim().matches("\\d+"))        // номер — только цифры
+                    .filter(line -> line != null && !line.trim().isEmpty())
+                    .filter(line -> line.contains(":"))
+                    .map(line -> line.split(":", 2))
+                    .filter(parts -> parts.length == 2 && !parts[1].trim().isEmpty())
+                    .filter(parts -> parts[1].trim().matches("\\d+"))
                     .collect(Collectors.groupingBy(
-                            parts -> Integer.parseInt(parts[1].trim()),          // ключ — номер
+                            parts -> Integer.parseInt(parts[1].trim()),
                             Collectors.mapping(
-                                    parts -> formatName(parts[0].trim()),           // значение — имя
+                                    parts -> formatName(parts[0].trim()),
                                     Collectors.toList()
                             )
                     ));
@@ -398,7 +370,6 @@ public class Main {
         }
     }
 
-    // Вспомогательный метод: "вася" → "Вася"
     private static String formatName(String name) {
         if (name == null || name.isEmpty()) return name;
         return name.substring(0, 1).toUpperCase() +
